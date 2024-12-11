@@ -22,4 +22,4 @@ export interface IAuthContext {
     isLoading: boolean;
 }
 
-export type IResponseType = FestivalTypeID
+export type IResponseType = NotesTypeID
