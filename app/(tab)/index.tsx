@@ -1,27 +1,26 @@
 import { View, Text, StyleSheet, Button } from 'react-native';
 import LoginForm from '@/components/LoginForm';
 import { useSession } from '@/contexts/AuthContext';
+import { IAuthContext } from '@/types';
 
 export default function Tab() {
   const { session, signOut } = useSession();
 
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
+      <Text>Tab Home</Text>
 
       {(session) ? (
-       <Button 
-       onPress={signOut}
-       title='Log Out'
-       color='#841584'
-       
-       />
+        <Button 
+          onPress={signOut}
+          title="Logout"
+          color="#841584"
+        />
       ) : (
-
-      <LoginForm />
+        <LoginForm />
       )}
 
-
+      
     </View>
   );
 }

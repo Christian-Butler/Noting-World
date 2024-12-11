@@ -4,6 +4,12 @@ export interface NotesType {
     description: string;
 }
 
+export interface TagsType {
+    _id: string;
+    tag_name: string;
+}
+
+
 
 export interface IAuthContext {
     signIn: (token:string) => void;

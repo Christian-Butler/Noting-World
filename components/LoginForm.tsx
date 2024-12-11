@@ -24,7 +24,7 @@ export default function LoginForm() {
         console.log("clicked")
 
         try {
-            const response = await axios.post('https://notes-api.vercel.app/api/users/login', {
+            const response = await axios.post('https://ajs-ca-notebooks.vercel.app/api/users/login', {
             email: form.email,
             password: form.password
         })
@@ -35,6 +35,7 @@ export default function LoginForm() {
             setError(e.response.data.message)
         }
     }
+    
 
     return (
         <>

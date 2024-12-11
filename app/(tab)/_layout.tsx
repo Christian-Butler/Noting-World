@@ -1,35 +1,45 @@
-import { View, Text, StyleSheet, Button } from 'react-native';
-import LoginForm from '@/components/LoginForm';
-import { useSession } from '@/contexts/AuthContext';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Tabs } from 'expo-router';
 
-export default function Tab() {
-  const { session, signOut } = useSession();
-
+export default function TabLayout() {
   return (
-    <View style={styles.container}>
-      <Text>Login</Text>
+    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
+      <Tabs.Screen
+        name="main"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="notes/index"
+        options={{
+          title: 'Notes',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="pencil" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+        }}
+      />
 
-      {(session) ? (
-       <Button 
-       onPress={signOut}
-       title='Log Out'
-       color='#841584'
-       
-       />
-      ) : (
 
-      <LoginForm />
-      )}
-
-
-    </View>
+      <Tabs.Screen
+        name="test"
+        options={{
+          title: 'test',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="anchor" color={color} />,
+        }}
+      />
+      <Tabs.Screen 
+        name='notes/[id]/index'
+        options={{
+          href: null
+        }}
+      />
+    </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
