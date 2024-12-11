@@ -5,7 +5,7 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
       <Tabs.Screen
-        name="main"
+        name="index"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
@@ -14,8 +14,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="notes/index"
         options={{
-          title: 'Notes',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="pencil" color={color} />,
+          title: 'notes',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="heart" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -23,15 +23,6 @@ export default function TabLayout() {
         options={{
           title: 'Settings',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
-        }}
-      />
-
-
-      <Tabs.Screen
-        name="test"
-        options={{
-          title: 'test',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="anchor" color={color} />,
         }}
       />
       <Tabs.Screen 

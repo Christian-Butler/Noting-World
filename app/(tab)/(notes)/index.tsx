@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import NotesItem from '@/components/Notesitem';
-import { NotesType } from '@/types';
+import { NotesType, NotesTypeID } from '@/types';
 
 
 export default function Tab() {
@@ -30,7 +30,7 @@ export default function Tab() {
         <FlatList
           data={note}
           renderItem={({item}) => <NotesItem notes={item} />}
-          keyExtractor={(notes: NotesType) => notes._id}
+          keyExtractor={(notes: NotesTypeID) => notes._id}
         />
       </SafeAreaView>
     </SafeAreaProvider>
