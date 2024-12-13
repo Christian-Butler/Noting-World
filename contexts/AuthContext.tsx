@@ -24,12 +24,13 @@ export function SessionProvider(props: PropsWithChildren){
     return (
         <AuthContext.Provider
             value={{
-                signIn: (token) => {
+                signIn: (token: string) => {
                     setSession(token);
                 },
                 signOut: () => {
                     setSession(null);
                 },
+                getToken: async () => session,
                 session,
                 isLoading
             }}

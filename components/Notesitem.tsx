@@ -10,10 +10,14 @@ export default function NotesItem({notes}: MyProps){
     return (
         <View style={styles.item}>
             <Link href={{
-                pathname: '/(tab)/(notes)/main',
+                pathname: '/notes/[id]',
                 params: { id: notes._id }
-            }}><Text>{notes.title}</Text></Link>
+            }as const}><Text>{notes.title}</Text></Link>
             <Text>{notes.description}</Text>
+            <Link href={{ 
+                pathname: '/notes/[id]/create',
+                params: { id: notes._id }
+            }}><Text>Create</Text></Link>
         </View>
     );
 }

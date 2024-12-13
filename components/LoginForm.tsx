@@ -13,10 +13,10 @@ export default function LoginForm() {
 
     const {signIn} = useSession();
 
-    const handleChange = (e:any) => {
+    const handleChange = (value:string, id:string) => {
         setForm(prevState => ({
             ...prevState,
-            [e.target.id]: e.target.value
+            [id]: value
         }))
     }
 
@@ -43,7 +43,7 @@ export default function LoginForm() {
                 style={styles.input}
                 placeholder='Email'
                 value={form.email}
-                onChange={handleChange}
+                onChangeText={(value) => handleChange(value, 'email')}
                 id='email'
             />
 
@@ -51,7 +51,7 @@ export default function LoginForm() {
                 style={styles.input}
                 placeholder='Password'
                 value={form.password}
-                onChange={handleChange}
+                onChangeText={(value) => handleChange(value, 'password')}
                 id='password'
             />
 
@@ -71,9 +71,8 @@ export default function LoginForm() {
 
 const styles = StyleSheet.create({
     input: {
-        width: 200,
         height: 40,
-        margin: 12,
+        margin: 10,
         borderWidth: 1,
         padding: 10
     }

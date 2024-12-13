@@ -3,21 +3,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import NotesItem from '@/components/Notesitem';
+import { NotesTypeID } from '@/types';
 
-import { useLocalSearchParams } from 'expo-router';
-
-import { NotesType } from '@/types';
-
-import { Link } from 'expo-router';
-
-
-export default function Tab() {
-  const [notes, setNotes] = useState<NotesType | null>(null);
-  const { id } = useLocalSearchParams();
+export default function AllNotes() {
+  const [note, setNotes] = useState([]);
 
   useEffect(() => {
     
-    axios.get(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`)
+    axios.get('https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes')
          .then(response => {
           console.log(response.data);
           setNotes(response.data);
@@ -28,13 +21,18 @@ export default function Tab() {
 
   }, []);
 
-  if(!notes) return <Text>No Notes found</Text>
+  if(note.length === 0) return <Text>No notes found</Text>
   
   return (
-    <View style={styles.container}>
-        <Text>{notes.title}</Text>
-        <Text>{notes.description}</Text>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={note}
+          renderItem={({item}) => <NotesItem notes={item} />}
+          keyExtractor={(notes: NotesTypeID) => notes._id}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
