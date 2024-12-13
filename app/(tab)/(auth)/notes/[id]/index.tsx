@@ -1,34 +1,38 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList,Button } from 'react-native';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-import { useLocalSearchParams } from 'expo-router';
-
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { useSession } from '@/contexts/AuthContext';
+import { useLocalSearchParams, Link, router } from 'expo-router';
+import useAPI from '@/hooks/useAPI';
 import { NotesType } from '@/types';
-
-
 export default function Tab() {
   const [notes, setNotes] = useState<NotesType | null>(null);
+  const { session } = useSession();
   const { id } = useLocalSearchParams<{ id: string }>();
+    const { getRequest,deleteRequest} = useAPI();
 
   useEffect(() => {
     
-    axios.get(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, {
+   getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, {
             headers: {
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNidXRsZXJAaWNsb3VkLmNvbSIsImZ1bGxfbmFtZSI6ImNocmlzdGlhbiBidXRsZXIiLCJfaWQiOiI2NzJhMWZkZmQ1Yjc5MTA4MzVlNjkzOTQiLCJpYXQiOjE3MzQwMzkwNDh9.3ErVmxFqos_EwHZn21FPg0EEb3IR4mUUPasInEthF2w'
+                Authorization: `Bearer ${session}`
             }
+        }, (data) => {  
+            setNotes(data as NotesType);
         })
-         .then(response => {
-            console.log(response.data);
-            setNotes(response.data);
-         })
-         .catch(e => {
-            console.log(e);
-         });
 
   }, [id]);
+
+  const handleDelete = () => {
+    deleteRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${session}`
+      }
+    }, (data) => {
+      router.push(`/notes`);
+      console.log(data);
+    });
+  }
+
 
   if(!notes) return <Text>Notes not found</Text>
   
@@ -36,6 +40,8 @@ export default function Tab() {
     <View style={styles.container}>
         <Text>{notes.title}</Text>
         <Text>{notes.description}</Text>
+        <Link href={`/notes/${id}/edit`}>Edit</Link>
+        <Button title="Delete" onPress={handleDelete} />
     </View>
   );
 }
@@ -45,5 +51,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  item: {
+    backgroundColor: '#eaeaea',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16
   },
 });

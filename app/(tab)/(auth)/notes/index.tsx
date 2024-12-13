@@ -4,6 +4,7 @@ import axios from 'axios';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import NotesItem from '@/components/Notesitem';
 import { NotesTypeID } from '@/types';
+import { Link } from 'expo-router';
 
 export default function AllNotes() {
   const [note, setNotes] = useState([]);
@@ -26,6 +27,7 @@ export default function AllNotes() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
+        <Link href="/notes/create">Create Note</Link>
         <FlatList
           data={note}
           renderItem={({item}) => <NotesItem notes={item} />}

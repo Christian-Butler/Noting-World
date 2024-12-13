@@ -4,13 +4,15 @@ import {router} from 'expo-router';
 import { NotesType } from '@/types';
 import { useSession } from '@/contexts/AuthContext';
 import  usePost  from '@/hooks/usePost';
+import useAPI from '@/hooks/useAPI';
+
 export default function Page() {
- const session = useSession();
+ const { session } = useSession();
   const [form, setForm] = useState({
     title: "",
     description: "",
   });
-  const { postRequest, data, loading, error } = usePost();
+  const { postRequest, data, loading, error } = useAPI();
 
   const handleChange = (e: any) => {
     setForm((prevState) => ({
@@ -23,10 +25,10 @@ export default function Page() {
     console.log("Clicked");
      postRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes`, form, {
       headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNidXRsZXJAaWNsb3VkLmNvbSIsImZ1bGxfbmFtZSI6ImNocmlzdGlhbiBidXRsZXIiLCJfaWQiOiI2NzJhMWZkZmQ1Yjc5MTA4MzVlNjkzOTQiLCJpYXQiOjE3MzQwMzkwNDh9.3ErVmxFqos_EwHZn21FPg0EEb3IR4mUUPasInEthF2w',
+        Authorization: `Bearer ${session}`
       }
-    }, (data:NotesType) => {
-        router.push(`/notes/${data._id}` as any);
+    }, (data) => {
+        router.push(`/notes/${data._id}`);
     });
   };
   //     console.log(data);

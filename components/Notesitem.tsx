@@ -14,10 +14,6 @@ export default function NotesItem({notes}: MyProps){
                 params: { id: notes._id }
             }as const}><Text>{notes.title}</Text></Link>
             <Text>{notes.description}</Text>
-            <Link href={{ 
-                pathname: '/notes/[id]/create',
-                params: { id: notes._id }
-            }}><Text>Create</Text></Link>
         </View>
     );
 }

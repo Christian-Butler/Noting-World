@@ -15,8 +15,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="notes/index"
+        name="notes"
         options={{
+          headerTitle: "Notes",
           title: "Notes",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="heart" color={color} />
@@ -32,6 +33,18 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="notes/[id]/index"
+        options={{
+          href: null,
+        }}
+      />
+       <Tabs.Screen
+        name="notes/[id]/edit"
+        options={{
+          href: null,
+        }}
+      />
+        <Tabs.Screen
+        name="notes/create"
         options={{
           href: null,
         }}
