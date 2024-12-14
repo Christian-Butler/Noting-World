@@ -34,4 +34,4 @@ export interface IAuthContext {
     signOut: () => void;
 }
 
-export type IResponseType = NotesTypeID
+export type IResponseType = NotesTypeID | AuthorTypeID | TagsTypeID;

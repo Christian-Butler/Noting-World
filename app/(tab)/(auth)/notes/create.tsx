@@ -3,11 +3,11 @@ import { useState } from 'react';
 import {router} from 'expo-router';
 import { NotesType } from '@/types';
 import { useSession } from '@/contexts/AuthContext';
-import  usePost  from '@/hooks/usePost';
 import useAPI from '@/hooks/useAPI';
-
+import { useRouter } from 'expo-router';
 export default function Page() {
  const { session } = useSession();
+ const router = useRouter();
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -21,12 +21,15 @@ export default function Page() {
     }));
   };
 
-  const handlePress = () => {
-    console.log("Clicked");
-     postRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes`, form, {
-      headers: {
-        Authorization: `Bearer ${session}`
-      }
+  
+
+  const handleSubmit = () => {
+    console.log(form);
+
+    postRequest('https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes', form, {
+        headers: {
+            Authorization: `Bearer ${session}`
+        }
     }, (data) => {
         router.push(`/notes/${data._id}`);
     });
@@ -62,7 +65,7 @@ export default function Page() {
         id="description"
       />
       <Text>{error}</Text>
-      <Button onPress={handlePress} title="Submit" color="#841584" />
+      <Button onPress={handleSubmit} title="Submit" color="#841584" />
     </>
   );
 }

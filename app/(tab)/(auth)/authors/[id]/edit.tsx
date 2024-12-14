@@ -2,31 +2,30 @@ import { useState, useEffect } from 'react';
 import { Text, TextInput, StyleSheet, Button } from 'react-native';
 import { useSession } from '@/contexts/AuthContext';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { NotesType } from '@/types';   
+import { AuthorType } from '@/types';   // You'll need to update this type
 import useAPI from '@/hooks/useAPI';
 
 export default function Page() {
     const router = useRouter();
-    const [note, setNotes] = useState<NotesType | null>(null);
+    const [author, setAuthors] = useState<AuthorType | null>(null);
     const { session } = useSession();
     const { id } = useLocalSearchParams();
 
-    const [form, setForm] = useState<NotesType>({
+    const [form, setForm] = useState<AuthorType>({
         _id: "",
-        title: "",
-        description: ""
+        first_name: "",
+        last_name: ""
     });
     const { getRequest, putRequest, data, loading, error } = useAPI();
 
-
     useEffect(() => {
-        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, {
+        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors/${id}`, {
             headers: {
                 Authorization: `Bearer ${session}`
             }
         }, (data) => {
-            setNotes(data as NotesType);
-            setForm(data as NotesType);
+            setAuthors(data as AuthorType);
+            setForm(data as AuthorType);
         })
     }, [id]);
 
@@ -39,12 +38,12 @@ export default function Page() {
 
     const handleSubmit = () => {
         console.log(form);
-        putRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, form, {
+        putRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors/${id}`, form, {
             headers: {
                 Authorization: `Bearer ${session}`
             }
         }, (data) => {
-            router.push(`/notes/${data._id}`);
+            router.push(`/authors/${data._id}`);
         });
     }
 
@@ -56,7 +55,7 @@ export default function Page() {
             <TextInput
                 style={styles.input}
                 placeholder='Title'
-                value={form.title}
+                value={form.first_name}
                 onChange={handleChange}
                 id='title'
             />
@@ -65,7 +64,7 @@ export default function Page() {
             <TextInput
                 style={styles.input}
                 placeholder='Description'
-                value={form.description}
+                value={form.last_name}
                 onChange={handleChange}
                 id='description'
             />

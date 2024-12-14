@@ -45,7 +45,7 @@ export default function usePost(){
 
       axios.get(url, headers)
            .then(response => {
-              setData(response.data.data);
+              setData(response.data);
               onSuccess(response.data.data);
            })
            .catch(e => {
@@ -57,19 +57,19 @@ export default function usePost(){
   }, []);
 
 const deleteRequest = useCallback((url: string, headers: object, onSuccess: <T extends IResponseType>(data:T) => void) => {
-   setLoading(true);
+    setLoading(true);
 
-   axios.delete(url, headers)
-          .then(response => {
-               setData(response.data);
-               onSuccess(response.data);
-          })
-          .catch(e => {
-               setError(e.response.data.message);
-          })
-          .finally(() => {
-               setLoading(false);
-          });
+    axios.delete(url, headers)
+         .then(response => {
+            setData(response.data);
+            onSuccess(response.data);
+         })
+         .catch(e => {
+            setError(e.response.data.message);
+         })
+         .finally(() => {
+            setLoading(false);
+         });
 }, []);
 
     return { getRequest, putRequest, postRequest,deleteRequest, data, loading, error};

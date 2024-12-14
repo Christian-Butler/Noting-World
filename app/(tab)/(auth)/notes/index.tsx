@@ -6,7 +6,7 @@ import NotesItem from '@/components/Notesitem';
 import { NotesTypeID } from '@/types';
 import { Link } from 'expo-router';
 
-export default function AllNotes() {
+export default function Notes() {
   const [note, setNotes] = useState([]);
 
   useEffect(() => {

@@ -8,7 +8,7 @@ export default function Tab() {
   const [notes, setNotes] = useState<NotesType | null>(null);
   const { session } = useSession();
   const { id } = useLocalSearchParams<{ id: string }>();
-    const { getRequest,deleteRequest} = useAPI();
+    const { getRequest, deleteRequest} = useAPI();
 
   useEffect(() => {
     
@@ -23,6 +23,7 @@ export default function Tab() {
   }, [id]);
 
   const handleDelete = () => {
+   
     deleteRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, {
       headers: {
         Authorization: `Bearer ${session}`

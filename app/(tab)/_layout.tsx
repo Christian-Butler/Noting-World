@@ -1,12 +1,11 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 
-
 export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
       <Tabs.Screen
-        name="index"
+        name="index"  // Changed from "Home" to "index"
         options={{
           headerTitle: "Home",
           tabBarIcon: ({ color }) => (
@@ -15,38 +14,58 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="notes"
+        name="notes"  // Changed from "notes/index"
         options={{
           headerTitle: "Notes",
           title: "Notes",
+          href: "/notes",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="heart" color={color} />
+            <FontAwesome size={28} name="edit" color={color} />
           ),
+          tabBarLabel: "Notes",
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="authors"  // Changed from "authors/index"
         options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+          headerTitle: "Authors",
+          title: "Authors",
+          href: "/authors",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="user" color={color} />
+          ),
+          tabBarLabel: "Authors",
         }}
       />
       <Tabs.Screen
-        name="notes/[id]/index"
+        name="tags"  // Changed from "tags/index"
         options={{
-          href: null,
+          headerTitle: "Tags",
+          title: "Tags",
+          href: "/tags",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="tags" color={color} />
+          ),
+          tabBarLabel: "Tags",
         }}
       />
-       <Tabs.Screen
-        name="notes/[id]/edit"
+      {/* Hidden routes */}
+      <Tabs.Screen 
+        name="notes/[id]"
         options={{
-          href: null,
+          href: null
         }}
       />
-        <Tabs.Screen
-        name="notes/create"
+      <Tabs.Screen 
+        name="authors/[id]"
         options={{
-          href: null,
+          href: null
+        }}
+      />
+      <Tabs.Screen 
+        name="tags/[id]"
+        options={{
+          href: null
         }}
       />
     </Tabs>
