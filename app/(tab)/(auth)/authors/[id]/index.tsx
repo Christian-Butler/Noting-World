@@ -12,7 +12,7 @@ export default function Tab() {
     const { getRequest, deleteRequest} = useAPI();
 
     useEffect(() => {
-        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors/${id}`, {
+        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/author/${id}`, {
             headers: {
                 Authorization: `Bearer ${session}`
             }
@@ -22,7 +22,7 @@ export default function Tab() {
     }, [id]);
 
     const handleDelete = () => {
-        deleteRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors/${id}`, {
+        deleteRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/author/${id}`, {
             headers: {
                 Authorization: `Bearer ${session}`
             }

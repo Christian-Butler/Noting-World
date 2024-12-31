@@ -1,10 +1,12 @@
 export interface NotesType {
+    length: number;
     _id: string;
     title: string;
     description: string;
 }
 
 export interface AuthorType {
+    length: 0;
     _id: string;
     first_name: string;
     last_name: string;

@@ -7,13 +7,12 @@ export default function Layout() {
       <Stack
       screenOptions={{
         // Hide the header for all other routes.
-        headerShown: true,
+        headerShown: false,
       }}
       
       >
         <Stack.Screen name="(tab)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-       
       </Stack>
     </SessionProvider>
   );

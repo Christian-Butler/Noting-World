@@ -1,33 +1,32 @@
+
 import { useState, useEffect } from 'react';
 import { Text, TextInput, StyleSheet, Button } from 'react-native';
 import { useSession } from '@/contexts/AuthContext';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { NotesType } from '@/types';   
+import { TagsType } from '@/types';
 import useAPI from '@/hooks/useAPI';
 
 export default function Page() {
     const router = useRouter();
-    const [note, setNotes] = useState<NotesType | null>(null);
+    const [tag, setTag] = useState<TagsType | null>(null);
     const { session } = useSession();
     const { id } = useLocalSearchParams();
 
-    const [form, setForm] = useState<NotesType>({
+    const [form, setForm] = useState<TagsType>({
         _id: "",
-        title: "",
-        description: "",
-        length: 0
+        tag_name: "",
+  
     });
     const { getRequest, putRequest, data, loading, error } = useAPI();
 
-
     useEffect(() => {
-        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, {
+        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/tags/${id}`, {
             headers: {
                 Authorization: `Bearer ${session}`
             }
         }, (data) => {
-            setNotes(data as NotesType);
-            setForm(data as NotesType);
+            setTag(data as TagsType);
+            setForm(data as TagsType);
         })
     }, [id]);
 
@@ -40,12 +39,12 @@ export default function Page() {
 
     const handleSubmit = () => {
         console.log(form);
-        putRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/notes/${id}`, form, {
+        putRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/tags/${id}`, form, {
             headers: {
                 Authorization: `Bearer ${session}`
             }
         }, (data) => {
-            router.push(`/notes/${data._id}`);
+            router.push(`/tags/${data._id}`);
         });
     }
 
@@ -53,24 +52,14 @@ export default function Page() {
     
     return (
         <>
-            <Text>Title</Text>
+            <Text>Name</Text>
             <TextInput
                 style={styles.input}
-                placeholder='Title'
-                value={form.title}
+                placeholder='Name'
+                value={form.tag_name}
                 onChange={handleChange}
-                id='title'
+                id='name'
             />
-
-            <Text>Description</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='Description'
-                value={form.description}
-                onChange={handleChange}
-                id='description'
-            />
-
             <Text>{error}</Text>
             <Button 
                 onPress={handleSubmit}

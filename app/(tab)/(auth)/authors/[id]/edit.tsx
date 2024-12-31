@@ -14,12 +14,13 @@ export default function Page() {
     const [form, setForm] = useState<AuthorType>({
         _id: "",
         first_name: "",
-        last_name: ""
+        last_name: "",
+        length: 0
     });
     const { getRequest, putRequest, data, loading, error } = useAPI();
 
     useEffect(() => {
-        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors/${id}`, {
+        getRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/author/${id}`, {
             headers: {
                 Authorization: `Bearer ${session}`
             }

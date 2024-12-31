@@ -26,7 +26,7 @@ export default function tags() {
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
-            
+            <Link href="/tags/create">Create Tags</Link>
                 <FlatList
                     data={tags}
                     renderItem={({ item }) => <TagsItem tags={item} />}

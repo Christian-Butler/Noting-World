@@ -4,11 +4,12 @@ import { useRouter } from 'expo-router';
 import { useSession } from '@/contexts/AuthContext';
 import useAPI from '@/hooks/useAPI';
 
-export default function CreateTagPage() {
+export default function CreateAuthor() {
     const { session } = useSession();
     const router = useRouter();
     const [form, setForm] = useState({
-        tag_name: "",
+        name: "",
+        bio: "",
     });
     const { postRequest, data, loading, error } = useAPI();
 
@@ -20,14 +21,12 @@ export default function CreateTagPage() {
     };
 
     const handleSubmit = () => {
-        console.log(form);
-
-        postRequest('https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/tags', form, {
-                headers: {
-                        Authorization: `Bearer ${session}`
-                }
+        postRequest('https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/author', form, {
+            headers: {
+                Authorization: `Bearer ${session}`
+            }
         }, (data) => {
-                router.push(`/tags/${data._id}`);
+            router.push(`/authors/${data._id}`);
         });
     };
 
@@ -37,13 +36,22 @@ export default function CreateTagPage() {
 
     return (
         <>
-            <Text>Tag Name</Text>
+            <Text>Name</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Tag Name"
-                value={form.tag_name}
+                placeholder="Name"
+                value={form.name}
                 onChange={handleChange}
-                id="tag_name"
+                id="name"
+            />
+
+            <Text>Bio</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Bio"
+                value={form.bio}
+                onChange={handleChange}
+                id="bio"
             />
             <Text>{error}</Text>
             <Button onPress={handleSubmit} title="Submit" color="#841584" />

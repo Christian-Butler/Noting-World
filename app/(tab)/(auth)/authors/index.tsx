@@ -10,7 +10,7 @@ export default function authors() {
     const [authors, setAuthors] = useState([]);
 
     useEffect(() => {
-        axios.get('https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors')
+        axios.get('https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/author')
             .then(response => {
                 console.log(response.data);
                 setAuthors(response.data);
