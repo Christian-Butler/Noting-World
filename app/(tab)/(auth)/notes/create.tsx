@@ -1,5 +1,6 @@
-import { Text, TextInput, StyleSheet, Button } from 'react-native';
-import { useState } from 'react';
+import { Text,  StyleSheet } from 'react-native';
+import { useState  } from 'react';
+import { TextInput,Button } from 'react-native-paper';
 import {router} from 'expo-router';
 import { NotesType } from '@/types';
 import { useSession } from '@/contexts/AuthContext';
@@ -31,7 +32,7 @@ export default function Page() {
             Authorization: `Bearer ${session}`
         }
     }, (data) => {
-        router.push(`/notes/${data._id}`);
+        router.push('/notes');
     });
   };
   //     console.log(data);
@@ -49,6 +50,7 @@ export default function Page() {
     <>
       <Text>Title</Text>
       <TextInput
+      mode='outlined'
         style={styles.input}
         placeholder="Title"
         value={form.title}
@@ -58,6 +60,7 @@ export default function Page() {
 
       <Text>Description</Text>
       <TextInput
+        mode='outlined'
         style={styles.input}
         placeholder="Description"
         value={form.description}
@@ -65,7 +68,9 @@ export default function Page() {
         id="description"
       />
       <Text>{error}</Text>
-      <Button onPress={handleSubmit} title="Submit" color="#841584" />
+      <Button mode="contained" onPress={handleSubmit} color="#841584">
+        Submit
+      </Button>
     </>
   );
 }

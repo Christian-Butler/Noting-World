@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Text, TextInput, StyleSheet, Button } from 'react-native';
+import { Text,  StyleSheet} from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 import { useSession } from '@/contexts/AuthContext';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { AuthorType } from '@/types';   // You'll need to update this type
@@ -39,7 +40,7 @@ export default function Page() {
 
     const handleSubmit = () => {
         console.log(form);
-        putRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/authors/${id}`, form, {
+        putRequest(`https://ajs-ca-notebooks-git-main-chris-butlers-projects-ef669578.vercel.app/api/author/${id}`, form, {
             headers: {
                 Authorization: `Bearer ${session}`
             }
@@ -58,7 +59,7 @@ export default function Page() {
                 placeholder='Title'
                 value={form.first_name}
                 onChange={handleChange}
-                id='title'
+                id='first_name'
             />
 
             <Text>Description</Text>
@@ -67,15 +68,14 @@ export default function Page() {
                 placeholder='Description'
                 value={form.last_name}
                 onChange={handleChange}
-                id='description'
+                id='last_name'
             />
 
             <Text>{error}</Text>
             <Button 
                 onPress={handleSubmit}
-                title="Submit"
-                color="#841584"
-            />
+                mode='contained'
+            >Submit</Button>
         </>
     );
 }

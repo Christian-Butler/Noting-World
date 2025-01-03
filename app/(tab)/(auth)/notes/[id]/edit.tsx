@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Text, TextInput, StyleSheet, Button } from 'react-native';
+import { Text, StyleSheet, } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 import { useSession } from '@/contexts/AuthContext';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { NotesType } from '@/types';   
@@ -74,9 +75,10 @@ export default function Page() {
             <Text>{error}</Text>
             <Button 
                 onPress={handleSubmit}
-                title="Submit"
-                color="#841584"
-            />
+                mode='contained'
+            >
+                Submit
+            </Button>
         </>
     );
 }

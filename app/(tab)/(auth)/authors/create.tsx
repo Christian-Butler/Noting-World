@@ -1,4 +1,5 @@
-import { Text, TextInput, StyleSheet, Button } from 'react-native';
+import { Text,  StyleSheet} from 'react-native';
+import { TextInput , Button  } from 'react-native-paper';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useSession } from '@/contexts/AuthContext';
@@ -8,8 +9,8 @@ export default function CreateAuthor() {
     const { session } = useSession();
     const router = useRouter();
     const [form, setForm] = useState({
-        name: "",
-        bio: "",
+        first_name: "",
+        last_name: "",
     });
     const { postRequest, data, loading, error } = useAPI();
 
@@ -26,7 +27,7 @@ export default function CreateAuthor() {
                 Authorization: `Bearer ${session}`
             }
         }, (data) => {
-            router.push(`/authors/${data._id}`);
+            router.push('/authors');
         });
     };
 
@@ -36,25 +37,27 @@ export default function CreateAuthor() {
 
     return (
         <>
-            <Text>Name</Text>
+            <Text>Authors First Name </Text>
             <TextInput
                 style={styles.input}
-                placeholder="Name"
-                value={form.name}
+                placeholder="First Name"
+                value={form.first_name}
                 onChange={handleChange}
-                id="name"
+                id="first_name"
             />
 
-            <Text>Bio</Text>
+            <Text>Authors Last Name</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Bio"
-                value={form.bio}
+                placeholder="Last Name"
+                value={form.last_name}
                 onChange={handleChange}
-                id="bio"
+                id="last_name"
             />
             <Text>{error}</Text>
-            <Button onPress={handleSubmit} title="Submit" color="#841584" />
+            <Button mode='contained' onPress={handleSubmit} >
+                Submit
+            </Button>
         </>
     );
 }

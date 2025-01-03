@@ -4,7 +4,7 @@ import { Tabs } from "expo-router";
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: "blue", tabBarStyle: {height: 60, paddingBottom: 8, paddingHorizontal:10}, tabBarItemStyle:{padding: 5, marginHorizontal: 5}, tabBarLabelStyle: {fontSize: 12, marginTop: 2} }}>
       <Tabs.Screen
         name="index"
         options={{
@@ -14,6 +14,7 @@ export default function TabLayout() {
           ),
         }}
       />
+     
       {/* <Tabs.Screen
         name="(auth)"
         options={{
@@ -25,12 +26,12 @@ export default function TabLayout() {
         }}
       /> */}
       <Tabs.Screen
-        name="notes"  // Changed from "notes/index"
+        name="notes"  
         options={{
           headerTitle: "Notes",
           title: "Notes",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="heart" color={color} />
+            <FontAwesome size={28} name="pencil" color={color} />
           ),
           tabBarLabel: "Notes",
         }}
@@ -55,6 +56,13 @@ export default function TabLayout() {
             <FontAwesome size={28} name="tags" color={color} />
           ),
           tabBarLabel: "Tags",
+        }}
+      />
+       <Tabs.Screen
+        name="(auth)"
+        options={{
+          tabBarButton: () => null,
+          headerShown: false
         }}
       />
 

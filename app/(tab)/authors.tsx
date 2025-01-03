@@ -1,5 +1,6 @@
-import { Button, View, Text, FlatList } from "react-native";
+import { Button, View, FlatList } from "react-native";
 import { useRouter, Link } from "expo-router";
+import { Text } from "react-native-paper";
 import Authorsitem from "@/components/Authorsitem";
 import { AuthorTypeID } from "@/types";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
@@ -32,8 +33,7 @@ export default function Authors() {
     <SafeAreaProvider
     style={[styles.container, styles.item]}
     >
-      <Text style={styles.item}>Authors</Text>
-      <Link href="/authors/create">Create Note</Link>
+      <Text variant="headlineMedium">Authors</Text>
 
       <FlatList
         data={authors}
@@ -48,6 +48,7 @@ const styles = {
   container: {
     flex: 1,
     textAlign: "center",
+    backgroundColor: '#FFFFFF'
   },
 
   item: {

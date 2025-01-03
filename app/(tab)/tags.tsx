@@ -1,4 +1,5 @@
-import { Button, View, Text, FlatList } from "react-native";
+import { Button, View, FlatList } from "react-native";
+import { Text } from "react-native-paper";
 import { useRouter,Link } from "expo-router";
 import Tagsitem from "@/components/Tagsitem";
 import { TagsTypeID } from "@/types";
@@ -25,8 +26,8 @@ export default function Tags() {
     <SafeAreaProvider
     style={[styles.container, styles.item]}
     >
-      <Text>Tags</Text>
-      <Link href="/tags/create">Create Note</Link>
+      <Text variant="headlineMedium">Tags</Text>
+     
       <FlatList
         data={tags}
         renderItem={({ item }) => <Tagsitem tags={item} />}
@@ -40,6 +41,7 @@ const styles = {
   container: {
     flex: 1,
     textAlign: "center",
+    backgroundColor: '#FFFFFF'
   },
 
   item: {

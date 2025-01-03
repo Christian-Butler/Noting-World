@@ -1,5 +1,6 @@
-import { Button, View, Text, FlatList } from "react-native";
+import { Button, View,  FlatList } from "react-native";
 import { useRouter, Link } from "expo-router";
+import { Text } from "react-native-paper";
 import { useEffect, useState } from "react";
 import { useSession } from "@/contexts/AuthContext";
 import { NotesType, NotesTypeID } from "@/types";
@@ -36,8 +37,7 @@ export default function Notes() {
     <SafeAreaProvider
     style={[styles.container, styles.item]}
     >
-      <Text>Notes</Text>
-      <Link href="/notes/create">Create Note</Link>
+      <Text variant="headlineMedium">Notes</Text>
       <FlatList
         data={notes}
         renderItem={({ item }) => <NotesItem notes={item} />}
@@ -51,6 +51,7 @@ const styles = {
   container: {
     flex: 1,
     textAlign: "center",
+    backgroundColor: '#FFFFFF'
   },
 
   item: {

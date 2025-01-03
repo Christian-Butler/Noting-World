@@ -1,4 +1,5 @@
-import { Text, TextInput, StyleSheet, Button } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useSession } from '@/contexts/AuthContext';
@@ -46,7 +47,9 @@ export default function CreateTagPage() {
                 id="tag_name"
             />
             <Text>{error}</Text>
-            <Button onPress={handleSubmit} title="Submit" color="#841584" />
+            <Button mode='contained' onPress={handleSubmit} >
+                Submit
+            </Button>
         </>
     );
 }
